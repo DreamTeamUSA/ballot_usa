@@ -55,7 +55,7 @@ Our mission is to connect citizens and representatives through problems and solu
 The individuals who’ll use this app will be US citizens who are of age and seek to be informed on local politics, create change in their community, and have meaningful discourse.
 <!-- content goes above -->
 
-## 🧳 User Journy Map
+## 🧳 User Journey Map
 <!-- content goes below -->
 In phase one Users can see the landing page. Phase two users can log in with required information like age, local area, and state. Phase three users can see information on local areas and state about local and state representatives. Users can also see an interactive map that can be used to see other state representatives and news articles on them.
 <!-- content goes above -->
@@ -72,7 +72,7 @@ In phase one Users can see the landing page. Phase two users can log in with req
 
 ## 🏋🏽 Extension Opportunities 
 <!-- content goes below -->
-
+Citizens can gain a following, and make posts
 <!-- content goes above --> 
 
 ## 📒 Sources
