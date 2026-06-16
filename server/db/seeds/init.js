@@ -4,6 +4,8 @@ const User = require("../models/User");
  * @returns { Promise<void> }
  */
 exports.seed = async (knex) => {
+  await knex("issue_responses").del();
+  await knex("issues").del();
   await knex("followers").del();
   await knex("posts").del();
   await knex("users").del();
@@ -11,6 +13,8 @@ exports.seed = async (knex) => {
   await knex.raw("ALTER SEQUENCE users_id_seq RESTART WITH 1");
   await knex.raw("ALTER SEQUENCE posts_id_seq RESTART WITH 1");
   await knex.raw("ALTER SEQUENCE followers_id_seq RESTART WITH 1");
+  await knex.raw("ALTER SEQUENCE issues_id_seq RESTART WITH 1");
+  await knex.raw("ALTER SEQUENCE issue_responses_id_seq RESTART WITH 1");
 
   await User.create(
     "Mayor of NYC",
@@ -449,5 +453,94 @@ exports.seed = async (knex) => {
     { follower_user_id: 20, followed_user_id: 21 },
     { follower_user_id: 21, followed_user_id: 19 },
     { follower_user_id: 21, followed_user_id: 20 },
+  ]);
+
+  const maria = await User.create(
+    "maria_rodriguez",
+    "1234",
+    false,
+    "Maria",
+    "Rodriguez",
+    "11201",
+    "New York"
+  );
+  const james = await User.create(
+    "james_okafor",
+    "1234",
+    false,
+    "James",
+    "Okafor",
+    "11203",
+    "New York"
+  );
+  const sarah = await User.create(
+    "sarah_chen",
+    "1234",
+    false,
+    "Sarah",
+    "Chen",
+    "10007",
+    "New York"
+  );
+  const david = await User.create(
+    "david_kim",
+    "1234",
+    false,
+    "David",
+    "Kim",
+    "11209",
+    "New York"
+  );
+
+  await knex("issues").insert([
+    {
+      user_id: maria.id,
+      title: "Pothole on Atlantic Avenue",
+      description:
+        "Large pothole near the Bergen Street intersection causing tire damage and traffic slowdowns.",
+      category: "infrastructure",
+      status: "submitted",
+      district: "Brooklyn CD-35",
+    },
+    {
+      user_id: james.id,
+      title: "Broken streetlight on Nostrand Avenue",
+      description:
+        "Streetlight has been out for three weeks, leaving the block poorly lit at night.",
+      category: "safety",
+      status: "in_progress",
+      district: "Brooklyn CD-35",
+    },
+    {
+      user_id: david.id,
+      title: "Illegal dumping in Shore Parkway park",
+      description:
+        "Repeated illegal dumping of construction debris near the park entrance on 92nd Street.",
+      category: "environment",
+      status: "resolved",
+      district: "Brooklyn CD-43",
+    },
+    {
+      user_id: sarah.id,
+      title: "Missing crosswalk at Chambers Street",
+      description:
+        "Pedestrians crossing between City Hall Park and the subway entrance have no marked crosswalk.",
+      category: "safety",
+      status: "submitted",
+      district: "Manhattan CD-1",
+    },
+  ]);
+
+  await knex("issue_responses").insert([
+    {
+      issue_id: 2,
+      user_id: 2,
+      body: "Thank you for reporting this. Our office has submitted a repair request to the Department of Transportation. Work is scheduled within the next two weeks.",
+    },
+    {
+      issue_id: 3,
+      user_id: 21,
+      body: "Sanitation crews cleared the site on March 12. We are coordinating with NYPD on increased patrols to prevent recurrence.",
+    },
   ]);
 };
