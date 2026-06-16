@@ -1,13 +1,10 @@
-const cookieSession = require('cookie-session');
-const handleCookieSessions = cookieSession({
-  name: 'session',
-  secret: process.env.SESSION_SECRET,
-  // By default, the cookie's lifetime is "session"
-  // which means until we close the browser. We like this for now!
-  // But in real life you'd set the cookie to expire,
-  // and implement an auto re-auth flow, but that's too much at this point.
+const cookieSession = require("cookie-session");
 
-  // maxAge: 1000 * 60 * 60 * 24  // 24 hours
+const handleCookieSessions = cookieSession({
+  name: "session",
+  keys: [process.env.SESSION_SECRET || "dev-secret-key"],
+  maxAge: 24 * 60 * 60 * 1000, // optional but recommended
+  httpOnly: true,
 });
 
 module.exports = handleCookieSessions;

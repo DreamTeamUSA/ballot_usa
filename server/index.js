@@ -7,6 +7,7 @@ const logRoutes = require("./middleware/logRoutes");
 
 const authRouter = require("./routers/authRouter");
 const userRouter = require("./routers/userRouter");
+const issueRouter = require("./routers/issueRouter");
 const { getAllPosts } = require("./controllers/postControllers");
 
 const app = express();
@@ -19,7 +20,7 @@ app.use(express.static(path.join(__dirname, "../frontend/dist"))); // Serve stat
 
 app.use("/api", authRouter);
 app.use("/api/users", userRouter);
-
+app.use("/api/issues", issueRouter);
 app.get("/api/posts", getAllPosts);
 // controller
 // model method
@@ -35,3 +36,4 @@ const port = process.env.PORT || 3000;
 app.listen(port, () => {
   console.log(`Server running at http://localhost:${port}/`);
 });
+
